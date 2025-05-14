@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>折线图示例</title>
+    <style>
+        canvas {
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <canvas id="myChart" style="width:800px; height:500px"></canvas>
+        <div id="main" style="width: 600px;height:400px;"></div>
+    </div>
+    
+
+
+    <script>
+    var myChart = echarts.init(document.getElementById('main'));
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    });
+    myChart.setOption({
+
+
+    })
+
+
+    function drawLineChart(dataset) {
+        const canvas = document.getElementById('myChart');
+        const dpr = window.devicePixelRatio || 1;
+    
+        // 适配高分辨率屏幕
+        canvas.width = 800 * dpr;
+        canvas.height = 500 * dpr;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+        // 图表布局参数
+        const margin = { top: 40, right: 40, bottom: 40, left: 60 };
+        const chartWidth = canvas.width - margin.left - margin.right;
+        const chartHeight = canvas.height - margin.top - margin.bottom;
+    
+        // 绘制网格系统
+        function drawGrid() {
+            ctx.save();
+            ctx.strokeStyle = '#eee';
+            ctx.lineWidth = 0.5;
+            
+            // 垂直网格线（每10%）
+            for (let percent = 10; percent < 100; percent += 10) {
+                const x = margin.left + (percent / 100) * chartWidth;
+                ctx.beginPath();
+                ctx.moveTo(x, margin.top);
+                ctx.lineTo(x, margin.top + chartHeight);
+                ctx.stroke();
+            }
+    
+            // 水平网格线（每0.5单位）
+            for (let value = 0.5; value < 5; value += 0.5) {
+                const y = margin.top + chartHeight - (value / 5) * chartHeight;
+                ctx.beginPath();
+                ctx.moveTo(margin.left, y);
+                ctx.lineTo(margin.left + chartWidth, y);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+    
+        // 绘制坐标轴
+        function drawAxes() {
+            ctx.save();
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 1;
+    
+            // 绘制横轴
+            ctx.beginPath();
+            ctx.moveTo(margin.left, margin.top + chartHeight);
+            ctx.lineTo(margin.left + chartWidth, margin.top + chartHeight);
+            ctx.stroke();
+    
+            // 绘制纵轴
+            ctx.beginPath();
+            ctx.moveTo(margin.left, margin.top);
+            ctx.lineTo(margin.left, margin.top + chartHeight);
+            ctx.stroke();
+    
+            // 添加横轴标签
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            for (let percent = 0; percent <= 100; percent += 10) {
+                const x = margin.left + (percent / 100) * chartWidth;
+                ctx.fillText(
+                    `${percent}%`,
+                    x,
+                    margin.top + chartHeight + 20
+                );
+            }
+    
+            // 添加纵轴标签
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            for (let value = 0; value <= 5; value += 0.5) {
+                const y = margin.top + chartHeight - (value / 5) * chartHeight;
+                ctx.fillText(
+                    value.toFixed(1),
+                    margin.left - 10,
+                    y
+                );
+            }
+            ctx.restore();
+        }
+    
+        // 绘制折线和数据点
+        function drawData() {
+
+            ctx.save();
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 2;
+            ctx.fillStyle = '#2196F3';
+            ctx.beginPath();
+    
+            // 转换坐标并绘制路径
+            dataset.forEach((xypair, i) => {
+                const px = margin.left + xypair[0] * chartWidth;
+                const py = margin.top + chartHeight - (xypair[1] / 5) * chartHeight;
+                
+                // 绘制连线
+                i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+            });
+    
+            ctx.stroke();
+            // 绘制数据点
+            ctx.beginPath();
+            dataset.forEach((xypair, i) => {
+                const px = margin.left + xypair[0] * chartWidth;
+                const py = margin.top + chartHeight - (xypair[1] / 5) * chartHeight;
+                
+                ctx.beginPath();
+                ctx.arc(px, py, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.restore();
+        }
+    
+        // 执行绘制
+        drawGrid();
+        drawAxes();
+        drawData();
+    }
+    
+    // 示例数据（x为百分比比例，y为0-5之间的值）
+    const example = [
+    [1.0000, 1.04],
+    [0.9286, 1.10],
+    [0.8667, 1.17],
+    [0.8125, 1.45],
+    [0.7647, 1.49],
+    [0.7222, 1.56],
+    [0.6842, 1.59],
+    [0.6500, 1.63],
+    [0.6190, 1.91],
+    [0.5909, 1.97],
+    [0.5652, 2.01],
+    [0.5417, 2.06],
+    [0.5200, 2.12],
+    [0.5000, 2.37],
+    [0.4815, 2.42],
+    [0.4643, 2.47],
+    [0.4483, 2.52],
+    [0.4333, 2.58],
+    [0.4194, 2.84],
+    [0.4063, 2.89],
+    [0.3939, 2.94],
+    [0.3824, 2.98],
+    [0.3714, 3.03]
+  ]
+    drawLineChart(example);
+    </script>
+</body>
+</html>
