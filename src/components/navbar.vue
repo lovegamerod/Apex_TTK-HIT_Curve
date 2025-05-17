@@ -42,8 +42,8 @@ export default {
     const currentTab = ref('chart')
     const selectedLanguage = ref('zh')
     const tabs = [
-      { name: '首页', component: 'chart' },
-      { name: '关于', component: 'list' },
+      { name: 'TTK-命中率表', component: 'chart' },
+      { name: '命中率自测', component: 'list' },
     ]
 
     const changeLanguage = () => {
