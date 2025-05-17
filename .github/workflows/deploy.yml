@@ -3,34 +3,30 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # 如果你使用的是主分支，改为main。如果是其他分支，替换为相应的分支名。
+      - main  # 这里使用你的主要分支名
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-      # 检出代码
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js 18
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'  # 设置 Node.js 版本为 18
+          node-version: '18'
 
-      # 安装依赖
       - name: Install dependencies
         run: yarn install
 
-      # 构建项目
       - name: Build the project
         run: yarn build
 
-      # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          folder: dist 
-          target_branch: gh-pages  # 发布到 gh-pages 分支
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GITHUB_TOKEN 进行身份验证
+          publish_dir: ./dist  # 输出的构建文件夹
+          publish_branch: gh-pages  # 要推送到的分支
