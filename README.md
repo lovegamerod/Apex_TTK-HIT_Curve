@@ -13,3 +13,5 @@
 
 ##### [Rebel-Gloria@Github](https://github.com/Rebel-Gloria)
 主要前端贡献者，负责前端页面设计和实现
+
+### 本项目基于GPL3协议开源，请遵守协议，数据来源(Json文件)为[老葛你又在打电动@Bilibili](https://space.bilibili.com/25435445)提供，这部分不属于本项目，如果您需要使用这部分数据，请联系[老葛你又在打电动@Bilibili](https://space.bilibili.com/25435445)
