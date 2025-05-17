@@ -175,10 +175,14 @@ export default {
     <div class="form-item">
       <div v-for="(itemName, id) in name" :key="id" class="form-item">
       <label class="form-label" style="color: #fff;">{{ itemName }}:</label>
-      <input 
-        type="text" 
-        v-model="formData[id]"
-      >
+      <div style="position: relative; display: inline-block;">
+        <input 
+          type="text" 
+          v-model="formData[id]"
+          style="padding-right: 25px; width: 50px;"
+        >
+        <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: #999;">%</span>
+      </div>
     </div>
   </div>
     
