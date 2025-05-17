@@ -1,11 +1,9 @@
 <script setup>
-import chart from './components/chart.vue'
-import list from './components/list.vue'
+import navbar from './components/navbar.vue'
 </script>
 
 <template>
-  <chart/>
-  <list/>
+  <navbar/>
 </template>
 
 <style scoped>
