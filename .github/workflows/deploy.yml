@@ -14,10 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Set up Node.js 18
         uses: actions/setup-node@v2
         with:
-          node-version: '16' 
+          node-version: '18'  # 设置 Node.js 版本为 18
 
       # 安装依赖
       - name: Install dependencies
@@ -32,5 +32,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
-          folder: dist  # 这是 Vite 默认的构建输出文件夹
+          folder: dist 
           target_branch: gh-pages  # 发布到 gh-pages 分支
