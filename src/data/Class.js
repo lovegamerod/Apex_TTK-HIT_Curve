@@ -1,5 +1,5 @@
 const classes={
-  "ARs": [
+  "突击步枪": [
     "HAVOC",
     "VK47",
     "Hemlok",
@@ -7,7 +7,7 @@ const classes={
     "NemesisB",
     "NemesisB_warp"
   ],
-  "SMGs": [
+  "冲锋枪": [
     "Alternator",
     "PB",
     "Auto_PB",
@@ -15,7 +15,7 @@ const classes={
     "Volt",
     "CAR"
   ],
-  "LMGs": [
+  "轻机枪": [
     "Devotion",
     "Devotion_warp",
     "Lstar",
@@ -23,25 +23,25 @@ const classes={
     "Rampage",
     "Rampage_warp"
   ],
-  "Marksman": [
+  "精确射手步枪": [
     "G7",
     "Triple",
     "3030",
     "Bocek"
   ],
-  "Snipers": [
+  "狙击枪": [
     "Charge",
     "Longbow",
     "Sentinel"
   ],
-  "Shotguns": [
+  "霰弹枪": [
     "Eva_8",
     "Mastiff",
     "Mozambique",
     "Mozambique_Dual",
     "Peacekeeper"
   ],
-  "Pistols": [
+  "手枪": [
     "RE45",
     "P2020",
     "P2020_Dual",
