@@ -110,7 +110,7 @@ export default {
             ...item,
             // 动态样式配置
             itemStyle: {
-                color: item.category === 1 ? '#5470c6' : '#ee6666'
+                color: item.category === 1 ? '#50BBAA' : '#ee6666'
             }
         }));
 
@@ -187,19 +187,20 @@ export default {
       </div>
     </div>
 
-    
+    <div class="button-group" style="margin-top: 20px;">
+      <button @click="generate" :disabled="isFormDataEmpty" :class="{ 'disabled-button': isFormDataEmpty }" style="height: 100px; width: 100px; font-size: 20px;">生成<br>→</button>
+    </div>
 
     <div class="json-section">
       <div style="width: 100%;">
         <div id="container" ref="chartContainer2" style="height: 400px; width: 470px;"></div>
       </div>
-      <textarea 
+      <textarea
         v-model="jsonText" 
         placeholder= "这里可以粘贴JSON数据"
         class="json-textarea"
       ></textarea>
       <div class="button-group">
-        <button @click="generate" :disabled="isFormDataEmpty" :class="{ 'disabled-button': isFormDataEmpty }">生成</button>
         <button @click="copyToClipboard" :disabled="isTextEmpty" :class="{ 'disabled-button': isTextEmpty }">复制到剪贴板</button>
         <button @click="parseAndUpdate" :disabled="isTextEmpty" :class="{ 'disabled-button': isTextEmpty }">读取并更新表单</button>
       </div>
@@ -212,7 +213,7 @@ export default {
 .form-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 6px;
   padding: 10px;
 }
 
@@ -248,7 +249,7 @@ input {
 .button-group button {
   margin-right: 10px;
   padding: 8px 15px;
-  background: #42b983;
+  background: #50BBAA;
   color: white;
   border: none;
   border-radius: 4px;
@@ -256,7 +257,7 @@ input {
 }
 
 .button-group button:hover {
-  background: #33a06f;
+  background: #307B6E;
 }
 
 .disabled-button {
