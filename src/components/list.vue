@@ -171,20 +171,22 @@ export default {
 };
 </script>
 <template>
+<!-- 修改两列显示 -->
   <div style="display: flex; flex-direction: row;">
-    <div class="form-item">
+    <div class="form-container">  <!-- 新增包裹容器 -->
       <div v-for="(itemName, id) in name" :key="id" class="form-item">
-      <label class="form-label" style="color: #fff;">{{ itemName }}:</label>
-      <div style="position: relative; display: inline-block;">
-        <input 
-          type="text" 
-          v-model="formData[id]"
-          style="padding-right: 25px; width: 50px;"
-        >
-        <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: #999;">%</span>
+        <label class="form-label" style="color: #fff;">{{ itemName }}:</label>
+        <div style="position: relative; display: inline-block;">
+          <input 
+            type="text" 
+            v-model="formData[id]"
+            style="padding-right: 25px; width: 50px;"
+          >
+          <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: #999;">%</span>
+        </div>
       </div>
     </div>
-  </div>
+
     
 
     <div class="json-section">
@@ -206,19 +208,30 @@ export default {
   </div>
 </template>
 <style>
-.form-item {
-  margin: 10px 10px;
+/* 新增表单容器样式 */
+.form-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
 }
+
+.form-item {
+  margin: 5px;
+}
+
 .form-label {
   display: inline-block;
   width: 250px;
   text-align: right;
   margin: 5px;
 }
+
 input {
   padding: 5px;
   border: 1px solid #ddd;
 }
+
 .json-section {
   margin: 20px 0;
 }
@@ -245,6 +258,7 @@ input {
 .button-group button:hover {
   background: #33a06f;
 }
+
 .disabled-button {
   background-color: #cccccc !important;
   cursor: not-allowed;
