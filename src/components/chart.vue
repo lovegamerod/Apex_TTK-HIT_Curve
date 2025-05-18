@@ -174,7 +174,6 @@ export default {
         <span class="label">ALL</span>
       </button>
     </div>
-    <div>{{ ALL }}</div>
   </div>
 </template>
 <style scoped>
