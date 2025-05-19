@@ -12,12 +12,13 @@ export default {
       ttk: this.percentage(ttks,names),
       name: names,
       classes: classes,
-      filter: [],
+      filter:{},
       ALL: true,
     };
   },
   mounted() {
     this.initChart();
+    this.initFilter();
   },
   beforeUnmount() {
     // 组件卸载前销毁图表
@@ -27,27 +28,42 @@ export default {
     }
   },
   methods: {
-    handleAll(ALL){
-      this.filter = []
-      if (ALL != true){
-        this.ALL = true
+    initFilter(){
+      for (let i in this.classes){
+        this.filter[i] = false
       }
-      this.handleFilter(this.filter)
     },
-    handleFilter(filter){
-      if (filter.length === 0){
+    handleAll(){
+      if (this.ALL != true){
+        this.initFilter()
+        this.handleFilter()
+      }
+      this.ALL = true
+    },
+    changeFilter(key) {
+      console.log(this.filter)
+      if (this.filter.hasOwnProperty(key)) {
+        this.filter[key] = !this.filter[key];
+        this.handleFilter();
+      }
+    },
+    handleFilter(){
+      const selectedKeys = Object.entries(this.filter)
+        .filter(([_, value]) => value)
+        .map(([key]) => key);
+      if (selectedKeys.length === 0){
         this.ALL = true
         this.chartInstance.setOption(this.changeOption(),true);
       }else{
         this.ALL = false
         const newSeris = []
-        for (var i in filter){
-          newSeris.push.apply(newSeris,this.ttk.filter(item => this.classes[filter[i]].includes(item["id"])))
+        for (var i in selectedKeys){
+          newSeris.push.apply(newSeris,this.ttk.filter(item => this.classes[selectedKeys[i]].includes(item["id"])))
         }
         this.chartInstance.setOption(this.changeOption({
           series: newSeris,
         }),true);
-        if (Object.values(filter).includes("Marksman") != true){
+        if (Object.values(selectedKeys).includes("精确射手步枪") != true){
           this.chartInstance.setOption({
             yAxis:{
               max: 'dataMax',
@@ -147,23 +163,15 @@ export default {
   <div ref="main_container" style="width: 100%;"> 
     <div ref="chartContainer" style="width: 100%; height: 600px; min-width: 750px;"></div>
   </div>
-  <div style="display: flex; flex-direction: row ; align-items: center;">
+  <div style="display: flex; flex-direction: row ; align-items: center; justify-content: space-between;">
     <div v-for="(item, index) in classes" :key="index" class="checkbox">
-      <button>
-        <label class="checkbox" :for="index">
-          <span class="label">{{ index }}</span>
-          <input type="checkbox" :value="index" :id="index" v-model="filter" @change="handleFilter(filter)" />
-          <span class="checkmark"></span>
-        </label>
+      <button class="checkbtn" :class="{active: this.filter[index]}" @click="changeFilter(index)">
+        <span class="label">{{ index }}</span>
       </button>
     </div>
     <div class="checkbox">
-      <button>
-        <label class="checkbox" for="ALL">
-          <span class="label">ALL</span>
-          <input type="checkbox" id="ALL" value="ALL" v-model="ALL" @change="handleAll(ALL)" />
-          <span class="checkmark"></span>
-        </label>        
+      <button class="checkbtn" :class="{active: this.ALL}" @click="handleAll(ALL)">
+        <span class="label">ALL</span>
       </button>
     </div>
   </div>
@@ -177,72 +185,30 @@ export default {
   color: black;
 }
 
-.checkbox input {
-  display: none;
+.checkbtn {
+  width: 168px;
+  height: 100px;
+  background: #212121;
+  outline: 0 solid #307B6E;
+  border-radius: 15px;
+  color: #000;
+  box-shadow: 0 0 0 1px #50BBAA;
+  transition: outline-width 0.2s;
+  border-width: 0px;
+  box-sizing: border-box;
 }
-
-.checkbox .checkmark {
-  width: 28px;
-  height: 28px;
-  border-radius: 10px;
-  background-color: #ffffff2b;
-  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, rgba(0, 0, 0, 0.21) 0px 0px 0px 24px inset,
-        #22cc3f 0px 0px 0px 0px inset, rgba(224, 224, 224, 0.45) 0px 1px 0px 0px;
-  cursor: pointer;
-  position: relative;
-}
-
-.checkbox .checkmark::after {
-  content: "";
-  width: 18px;
-  height: 18px;
-  border-radius: 5px;
-  background-color: #e3e3e3;
-  box-shadow: transparent 0px 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 6px 6px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: background-color 0.3s ease-in-out;
-}
-
-.checkbox input:checked + .checkmark {
-  background-color: #22cc3f;
-  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, #22cc3f 0px 0px 0px 2px inset, #22cc3f 0px 0px 0px 24px inset,
-        rgba(224, 224, 224, 0.45) 0px 1px 0px 0px;
-}
-
-.checkbox input:checked + .checkmark::after {
-  background-color: white;
-}
-
-.checkbox .label {
-  margin-top: 3px;
-  margin-right: 8px;
-  user-select: none;
+.label { 
+  font-size: 18px;
   font-weight: 700;
-  cursor: pointer;
   color: #ffffff7b;
 }
 
-button {
-  color: #090909;
-  padding: 0;
-  margin-right: -29px;
-  margin-left: 25px;
-  font-size: 18px;
-  border-radius: 0.5em;
-  background: linear-gradient(145deg, #1e1e1e, #232323);
-  cursor: pointer;
-  border: 1px solid #212121;
-  transition: all 0.3s;
-  box-shadow: 18px 18px 18px #1c1c1c, -18px -18px 18px #262626;
-  position: relative;
-  overflow: hidden;
+.checkbtn:hover {
+  outline-width: 8px;
 }
 
-button:active {
-  color: #666;
-  box-shadow: inset 4px 4px 12px #1c1c1c, inset -4px -4px 12px #262626;
+.checkbtn.active {
+  outline-width: 8px;
+  outline-color: #50BBAA;
 }
 </style>

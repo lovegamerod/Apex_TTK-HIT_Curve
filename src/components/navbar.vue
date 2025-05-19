@@ -63,11 +63,16 @@ export default {
 
 <style scoped>
 .navbar {
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   width: 100%;
+  height: 70px;
   background-color: #333;
-  padding: 1rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0;
+  padding-bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,10 +82,12 @@ export default {
 .nav-items {
   display: flex;
   gap: 1rem;
+  height: 100%;
 }
 
 button {
   padding: 0.5rem 1rem;
+  height: 100%;
   background: none;
   border: none;
   color: white;
@@ -89,11 +96,11 @@ button {
 }
 
 button:hover {
-  background-color: #555;
+  background-color: #307B6E;
 }
 
 button.active {
-  background-color: #666;
+  background-color: #50BBAA;
   font-weight: bold;
 }
 
@@ -107,6 +114,9 @@ button.active {
 
 .content {
   margin-top: 70px; /* 留出导航栏空间 */
-  padding: 1rem;
+  padding: 0.5rem;
+  height: calc(100vh - 70px);
+  box-sizing: border-box;
+  overflow: auto;
 }
 </style>
