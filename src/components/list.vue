@@ -117,7 +117,7 @@ export default {
       const option = {
         grid: {
           top: '35px',
-          right: '170px',
+          right: '180px',
           bottom: '3%',
           left: '10px',
           containLabel: true
@@ -161,7 +161,13 @@ export default {
           data: processedData
         }]
       }
-      this.chartInstance.setOption(option);
+      this.chartInstance.clear();
+      this.chartInstance.resize({
+        width: 480,
+        height: 100 + series.length * 50,
+      });
+      
+      this.chartInstance.setOption(option,true);
 
       window.addEventListener('resize', ()=>{
         if (this.chartInstance) this.chartInstance.resize();
@@ -192,8 +198,8 @@ export default {
     </div>
 
     <div class="json-section">
-      <div style="width: 100%;">
-        <div id="container" ref="chartContainer2" style="height: 400px; width: 470px;"></div>
+      <div style="width: 100%; height: 600px; overflow-y: auto;">
+        <div id="container" ref="chartContainer2" style="height: 400px; width: 480px;"></div>
       </div>
       <textarea
         v-model="jsonText" 
@@ -241,9 +247,10 @@ input {
   width: 100%;
   height: 150px;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ffffff7b;
   font-family: monospace;
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .button-group button {
