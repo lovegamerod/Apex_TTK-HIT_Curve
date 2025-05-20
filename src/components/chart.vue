@@ -163,7 +163,7 @@ export default {
   <div ref="main_container" style="width: 100%;"> 
     <div ref="chartContainer" style="width: 100%; height: 600px; min-width: 750px;"></div>
   </div>
-  <div style="display: flex; flex-direction: row ; align-items: center; justify-content: space-between;">
+  <div style="display: flex; flex-direction: row ; align-items: center; justify-content: space-between; padding: 0 30px;">
     <div v-for="(item, index) in classes" :key="index" class="checkbox">
       <button class="checkbtn" :class="{active: this.filter[index]}" @click="changeFilter(index)">
         <span class="label">{{ index }}</span>
@@ -180,14 +180,14 @@ export default {
 .checkbox {
   display: flex;
   align-items: center;
-  padding: 15px 25px;
+  padding: 10px 0;
   font-family: Arial, sans-serif;
   color: black;
 }
 
 .checkbtn {
-  width: 168px;
-  height: 100px;
+  width: 150px;
+  height: 80px;
   background: #212121;
   outline: 0 solid #307B6E;
   border-radius: 15px;
