@@ -178,7 +178,7 @@ export default {
 </script>
 <template>
 <!-- 修改两列显示 -->
-  <div style="display: flex; flex-direction: row; height: calc(100%-90px);">
+  <div style="display: flex; flex-direction: row;">
     <div class="form-container">  <!-- 新增包裹容器 -->
       <div v-for="(itemName, id) in name" :key="id" class="form-item">
         <label class="form-label" style="color: #fff;">{{ itemName }}:</label>
@@ -186,19 +186,19 @@ export default {
           <input 
             type="text" 
             v-model="formData[id]"
-            style="padding: 4px 25px 3px 4px; font-size: 16px; width: 50px; height: 16px;"
+            style="padding-right: 25px; width: 50px;"
           >
           <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: #999;">%</span>
         </div>
       </div>
     </div>
 
-    <div class="button-group" style="margin-top: 10px; height: 200px;">
+    <div class="button-group" style="margin-top: 20px;">
       <button @click="generate" :disabled="isFormDataEmpty" :class="{ 'disabled-button': isFormDataEmpty }" style="height: 100px; width: 100px; font-size: 20px;">生成<br>→</button>
     </div>
 
     <div class="json-section">
-      <div style="width: 100%; height: calc(100% - 200px); overflow-y: auto;">
+      <div style="width: 100%; height: 600px; overflow-y: auto;">
         <div id="container" ref="chartContainer2" style="height: 400px; width: 480px;"></div>
       </div>
       <textarea
@@ -215,36 +215,32 @@ export default {
   </div>
 </template>
 <style>
+/* 新增表单容器样式 */
 .form-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  padding: 0;
-  height: calc(17*45px); /* 17行*每行高度（41px+1容错） */
-  box-sizing: content-box;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 10px;
 }
 
 .form-item {
-  margin: 7px;
-  height: 31px;
+  margin: 5px;
 }
 
 .form-label {
   display: inline-block;
-  width: 230px;
+  width: 250px;
   text-align: right;
   margin: 5px;
 }
 
 input {
   padding: 5px;
-  border: 1px solid #307B6E;
-  border-radius: 2px;
+  border: 1px solid #ddd;
 }
 
 .json-section {
-  margin-top: 20px;
-  height: calc(100vh - 120px);
+  margin: 20px 0;
 }
 
 .json-textarea {
