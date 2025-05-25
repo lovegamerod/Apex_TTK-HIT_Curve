@@ -5,6 +5,7 @@
 ## 使用方法
 你可以拉取这个项目到本地然后使用yarn本地部署
 也可以直接使用GitHub Pages提供的[在线版本](https://oldcucumber.github.io/Apex_TTK-HIT_Curve/)。
+如果你的网络环境不允许您方便的访问GitHub Pages，你可以使用[apex.zju.wiki](https://apex.zju.wiki/)来访问。
 
 ## 致谢
 ##### [老葛你又在打电动@Bilibili](https://space.bilibili.com/25435445)
