@@ -136,7 +136,24 @@ export default {
             minInterval: 0.3,
             splitNumber: 10
         },
-        series: this.ttk
+        series: this.ttk,
+        dataZoom:[
+          {
+            type:'inside' ,
+            yAxisIndex: [0],
+            start: 0,
+            end: 100
+          },
+          {
+            type: 'slider', // 滑动条型数据区域缩放
+            xAxisIndex: [0],
+            show: true,    // 是否显示滑动条，默认 true
+            start: 0,
+            end: 50,      // 初始显示一半的数据
+            height: 20,    // 滑动条的高度
+            bottom: 0      // 滑动条的位置
+          }
+        ]
       };
 
       if (newOption){
@@ -197,7 +214,7 @@ export default {
   border-width: 0px;
   box-sizing: border-box;
 }
-.label { 
+.label {
   font-size: 18px;
   font-weight: 700;
   color: #ffffff7b;
