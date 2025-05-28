@@ -149,7 +149,7 @@ export default {
             xAxisIndex: [0],
             show: true,    // 是否显示滑动条，默认 true
             start: 0,
-            end: 50,      // 初始显示一半的数据
+            end: 100,      // 初始显示全部的数据
             height: 20,    // 滑动条的高度
             bottom: 0      // 滑动条的位置
           }
