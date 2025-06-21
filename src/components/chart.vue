@@ -26,7 +26,7 @@ const DATA_CONSTANTS = {
 const DEFAULT_OPTIONS = {
   grid: {
     top: '35px',
-    right: '230px',
+    right: '280px',
     bottom: '5%',
     left: '20px',
     containLabel: true
@@ -89,12 +89,16 @@ const DEFAULT_OPTIONS = {
     right: 10,
     top: 30,
     bottom: 20,
+    textStyle: {
+      fontSize: 14,
+    },
   },
   xAxis: {
     type: 'value',
     axisLabel: {
       formatter: '{value} %',
-      align: 'center'
+      align: 'center',
+      fontSize: 14,
     },
     min: 0,
     max: 100,
@@ -104,7 +108,8 @@ const DEFAULT_OPTIONS = {
     type: 'value',
     axisLabel: {
       formatter: (value) => `${value.toFixed(2)} s`,
-      align: 'right'
+      align: 'right',
+      fontSize: 14,
     },
     min: 0,
     max: 10,
@@ -399,7 +404,7 @@ export default {
 <template>
   <div ref="main_container" style="width: 100%;">
     <div ref="chartContainer" class="chartContainer"
-      :style="{ height: `calc(100vh - ${this.allCheckboxHeight + 150}px)` }"></div>
+      :style="{ height: `calc(100vh - ${this.allCheckboxHeight + 100}px)` }"></div>
   </div>
 
   <div style="display: flex; flex-direction: row ; align-items: center; justify-content: space-between;">
