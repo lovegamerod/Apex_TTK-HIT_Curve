@@ -14,7 +14,7 @@
 
       <!-- 语言选择下拉框 -->
       <select v-model="selectedLanguage" @change="changeLanguage" class="language-select">
-        <option v-for="item,name in langList" :value="name">{{ item.text }}</option>
+        <option v-for="(item, name) in langList" :key="name" :value="name">{{ item.text }}</option>
       </select>
     </nav>
 
