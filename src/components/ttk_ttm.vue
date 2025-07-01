@@ -65,7 +65,7 @@ const DEFAULT_OPTIONS = {
           <span style="display: inline-block; width: 10px; height: 10px; background-color: ${color}; border-radius: 50%; margin-right: 8px;"></span>
           ${seriesName}
         </div>
-        <div style="padding-left: 18px;">在 ${category} 中排名第 <span style="font-weight: bold;">${rank}</span></div>
+        <div style="padding-left: 18px;">容错率在 ${category} 中排名第 <span style="font-weight: bold;">${rank}</span></div>
         <div style="padding-left: 18px;">TTK: <span style="font-weight: bold;">${ttk.toFixed(3)}s</span></div>
         <div style="padding-left: 18px;">TTM: <span style="font-weight: bold;">${ttm.toFixed(3)}s</span></div>
       `;
